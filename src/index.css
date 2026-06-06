@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 168, 66, 0.3) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(212, 168, 66, 0.3);
+    border-radius: 3px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(212, 168, 66, 0.5);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: radial-gradient(circle at 50% 0%, #2f0707 0%, #0d0404 40%, #050202 100%) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(212, 168, 66, 0.3);
+    color: #ffffff;
+  }
+
+  select option {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ==========================================================================
+   LIGHT THEME SPOTLIGHT GRADIENT OVERRIDES
+   ========================================================================== */
+
+/* Body background override: Light champagne/gold stage glow */
+body {
+  background: radial-gradient(circle at 50% 0%, #ffffff 0%, #faf8f5 45%, #f2ebd9 100%) no-repeat !important;
+  background-size: cover !important;
+  background-attachment: fixed !important;
+  color: #1c1917 !important; /* Deep stone-900 */
+}
+
+/* Reset default typography colors to dark */
+h1, h2, h3, h4, h5, h6 {
+  color: #1c1917 !important;
+}
+
+/* Standard Tailwind text color overrides for light background */
+.text-white {
+  color: #1c1917 !important;
+}
+.text-gray-100 {
+  color: #292524 !important;
+}
+.text-gray-200 {
+  color: #44403c !important;
+}
+.text-gray-300 {
+  color: #44403c !important;
+}
+.text-gray-400 {
+  color: #57524d !important;
+}
+.text-gray-500 {
+  color: #78716c !important;
+}
+
+/* Adjust gold text colors for better contrast on light background */
+.text-gold-400 {
+  color: #9a7524 !important; /* gold-700 for high-contrast accessibility */
+}
+.text-gold-500 {
+  color: #7c5d1c !important; /* gold-800 */
+}
+
+/* Card and Panel background overrides (Glassmorphic Light panels) */
+.bg-theatre-dark\/50, 
+.bg-theatre-black\/60, 
+.bg-theatre-black\/40, 
+.bg-theatre-dark\/60,
+.bg-theatre-black\/20,
+.bg-theatre-black\/98,
+.bg-gold-900\/20,
+.bg-gold-900\/30,
+.bg-gold-900\/40,
+.bg-theatre-dark\/10,
+.bg-theatre-dark\/20,
+.bg-theatre-dark\/30 {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  border-color: rgba(212, 168, 66, 0.25) !important;
+}
+
+/* Card hover states */
+.hover\:border-gold-500\/30:hover,
+.hover\:border-gold-500\/20:hover {
+  border-color: rgba(212, 168, 66, 0.6) !important;
+}
+
+/* Form elements light background overrides */
+.bg-theatre-black\/60 {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(120, 113, 108, 0.3) !important;
+  color: #1c1917 !important;
+}
+input::placeholder, textarea::placeholder {
+  color: #78716c !important;
+}
+
+/* Header (Navigation Bar) translucent light override */
+header.bg-theatre-black\/80 {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(212, 168, 66, 0.2) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
+}
+header.bg-theatre-black\/80 .text-white {
+  color: #1c1917 !important;
+}
+
+/* Mobile menu light background */
+header nav.bg-theatre-black\/90 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  border-top: 1px solid rgba(212, 168, 66, 0.2) !important;
+}
+
+/* Keep media overlays and video hero content text white */
+.relative.overflow-hidden .relative.z-10,
+.relative.overflow-hidden .relative.z-10 *,
+section.relative .relative.z-10,
+section.relative .relative.z-10 * {
+  color: #ffffff !important;
+}
+
+/* Correct gold subheadings in heroes */
+.relative.overflow-hidden .relative.z-10 .text-gold-500,
+section.relative .relative.z-10 .text-gold-500 {
+  color: #facc15 !important; /* gold-400 for brightness on dark video overlay */
+}
+
+/* Keep buttons text correct */
+a.bg-gradient-to-r, button.bg-gradient-to-r {
+  color: #0c0a09 !important; /* Stone-950/Black for buttons */
+}
+
+/* FAQ Accordion headers should be dark */
+.faq-question, .faq-answer {
+  color: #1c1917 !important;
+}
+
+/* Light theme support for dialogs and select options */
+select option {
+  background-color: #ffffff !important;
+  color: #1c1917 !important;
+}
+
+/* Gallery lightbox should remain dark and cinematic */
+.fixed.z-50.bg-theatre-black\/95,
+.fixed.z-50.bg-theatre-black\/95 * {
+  background-color: rgba(10, 10, 10, 0.95) !important;
+  color: #ffffff !important;
+}
+
+/* Dark Solid Footer Anchor */
+footer {
+  background-color: #0a0a0a !important;
+  border-top: 1px solid rgba(212, 168, 66, 0.2) !important;
+}
+footer * {
+  color: #d6d3d1 !important; /* stone-300 */
+}
+footer a:hover {
+  color: #facc15 !important; /* gold-400 */
+}
+footer .font-display {
+  color: #ffffff !important;
+}
+footer .text-gold-500 {
+  color: #d4a842 !important;
+}
+footer .border-t {
+  border-color: rgba(212, 168, 66, 0.1) !important;
+}
+
