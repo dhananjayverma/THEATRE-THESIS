@@ -61,138 +61,171 @@
    ========================================================================== */
 
 /* Body background override: Light champagne/gold stage glow */
-body {
-  background: radial-gradient(circle at 50% 0%, #ffffff 0%, #faf8f5 45%, #f2ebd9 100%) no-repeat !important;
+body.light-theme {
+  background: radial-gradient(circle at 50% 0%, #fffdfa 0%, #f7ede2 50%, #ebdccb 100%) no-repeat !important;
   background-size: cover !important;
   background-attachment: fixed !important;
-  color: #1c1917 !important; /* Deep stone-900 */
+  color: #2d241e !important; /* Rich dark bronze/stone-900 */
 }
 
-/* Reset default typography colors to dark */
-h1, h2, h3, h4, h5, h6 {
-  color: #1c1917 !important;
+/* ==========================================================
+   Content Sections (Light Theme styling for all but the Hero)
+   ========================================================== */
+
+/* Style all content sections except the first section (the Hero) */
+body.light-theme main section:not(:first-of-type),
+body.light-theme .bg-transparent section:not(:first-of-type) {
+  background-color: transparent !important;
 }
 
-/* Standard Tailwind text color overrides for light background */
-.text-white {
-  color: #1c1917 !important;
-}
-.text-gray-100 {
-  color: #292524 !important;
-}
-.text-gray-200 {
-  color: #44403c !important;
-}
-.text-gray-300 {
-  color: #44403c !important;
-}
-.text-gray-400 {
-  color: #57524d !important;
-}
-.text-gray-500 {
-  color: #78716c !important;
+/* Selectively override text elements inside content sections */
+body.light-theme main section:not(:first-of-type) h1,
+body.light-theme main section:not(:first-of-type) h2,
+body.light-theme main section:not(:first-of-type) h3,
+body.light-theme main section:not(:first-of-type) h4,
+body.light-theme main section:not(:first-of-type) h5,
+body.light-theme main section:not(:first-of-type) h6,
+body.light-theme .bg-transparent section:not(:first-of-type) h1,
+body.light-theme .bg-transparent section:not(:first-of-type) h2,
+body.light-theme .bg-transparent section:not(:first-of-type) h3,
+body.light-theme .bg-transparent section:not(:first-of-type) h4,
+body.light-theme .bg-transparent section:not(:first-of-type) h5,
+body.light-theme .bg-transparent section:not(:first-of-type) h6 {
+  color: #2d241e !important;
 }
 
-/* Adjust gold text colors for better contrast on light background */
-.text-gold-400 {
-  color: #9a7524 !important; /* gold-700 for high-contrast accessibility */
+body.light-theme main section:not(:first-of-type) p,
+body.light-theme main section:not(:first-of-type) li,
+body.light-theme main section:not(:first-of-type) .text-gray-300,
+body.light-theme main section:not(:first-of-type) .text-gray-400,
+body.light-theme .bg-transparent section:not(:first-of-type) p,
+body.light-theme .bg-transparent section:not(:first-of-type) li,
+body.light-theme .bg-transparent section:not(:first-of-type) .text-gray-300,
+body.light-theme .bg-transparent section:not(:first-of-type) .text-gray-400 {
+  color: #5c4d3c !important; /* Warm dark brown text */
 }
-.text-gold-500 {
+
+body.light-theme main section:not(:first-of-type) .text-white,
+body.light-theme .bg-transparent section:not(:first-of-type) .text-white {
+  color: #2d241e !important;
+}
+
+/* Contrast adjustment for gold on light background */
+body.light-theme main section:not(:first-of-type) .text-gold-400,
+body.light-theme .bg-transparent section:not(:first-of-type) .text-gold-400 {
+  color: #9a7524 !important; /* gold-700 */
+}
+body.light-theme main section:not(:first-of-type) .text-gold-500,
+body.light-theme .bg-transparent section:not(:first-of-type) .text-gold-500 {
   color: #7c5d1c !important; /* gold-800 */
 }
 
-/* Card and Panel background overrides (Glassmorphic Light panels) */
-.bg-theatre-dark\/50, 
-.bg-theatre-black\/60, 
-.bg-theatre-black\/40, 
-.bg-theatre-dark\/60,
-.bg-theatre-black\/20,
-.bg-theatre-black\/98,
-.bg-gold-900\/20,
-.bg-gold-900\/30,
-.bg-gold-900\/40,
-.bg-theatre-dark\/10,
-.bg-theatre-dark\/20,
-.bg-theatre-dark\/30 {
-  background-color: rgba(255, 255, 255, 0.7) !important;
+/* Card and Panel backgrounds inside content sections */
+body.light-theme main section:not(:first-of-type) .bg-theatre-dark,
+body.light-theme main section:not(:first-of-type) .bg-theatre-dark\/50,
+body.light-theme main section:not(:first-of-type) .bg-theatre-black\/60,
+body.light-theme main section:not(:first-of-type) .bg-theatre-black\/40,
+body.light-theme main section:not(:first-of-type) .bg-theatre-dark\/60,
+body.light-theme main section:not(:first-of-type) .bg-theatre-black\/20,
+body.light-theme main section:not(:first-of-type) .bg-theatre-black\/98,
+body.light-theme main section:not(:first-of-type) .bg-gold-900\/20,
+body.light-theme main section:not(:first-of-type) .bg-gold-900\/30,
+body.light-theme main section:not(:first-of-type) .bg-gold-900\/40,
+body.light-theme main section:not(:first-of-type) .bg-theatre-dark\/10,
+body.light-theme main section:not(:first-of-type) .bg-theatre-dark\/20,
+body.light-theme main section:not(:first-of-type) .bg-theatre-dark\/30,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-dark,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-dark\/50,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-black\/60,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-black\/40,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-dark\/60,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-black\/20,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-black\/98,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-gold-900\/20,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-gold-900\/30,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-gold-900\/40,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-dark\/10,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-dark\/20,
+body.light-theme .bg-transparent section:not(:first-of-type) .bg-theatre-dark\/30 {
+  background-color: rgba(255, 255, 255, 0.75) !important;
   backdrop-filter: blur(12px) !important;
-  border-color: rgba(212, 168, 66, 0.25) !important;
+  border-color: rgba(184, 144, 46, 0.2) !important;
 }
 
 /* Card hover states */
-.hover\:border-gold-500\/30:hover,
-.hover\:border-gold-500\/20:hover {
+body.light-theme main section:not(:first-of-type) .hover\:border-gold-500\/30:hover,
+body.light-theme main section:not(:first-of-type) .hover\:border-gold-500\/20:hover,
+body.light-theme .bg-transparent section:not(:first-of-type) .hover\:border-gold-500\/30:hover,
+body.light-theme .bg-transparent section:not(:first-of-type) .hover\:border-gold-500\/20:hover {
   border-color: rgba(212, 168, 66, 0.6) !important;
 }
 
-/* Form elements light background overrides */
-.bg-theatre-black\/60 {
+/* Form inputs styling */
+body.light-theme main section:not(:first-of-type) input,
+body.light-theme main section:not(:first-of-type) textarea,
+body.light-theme main section:not(:first-of-type) select {
   background-color: rgba(255, 255, 255, 0.9) !important;
   border-color: rgba(120, 113, 108, 0.3) !important;
-  color: #1c1917 !important;
+  color: #2d241e !important;
 }
-input::placeholder, textarea::placeholder {
-  color: #78716c !important;
+body.light-theme main section:not(:first-of-type) input::placeholder,
+body.light-theme main section:not(:first-of-type) textarea::placeholder {
+  color: #8c827a !important;
 }
 
-/* Header (Navigation Bar) translucent light override */
-header.bg-theatre-black\/80 {
+/* Select options */
+body.light-theme select option {
+  background-color: #ffffff !important;
+  color: #2d241e !important;
+}
+
+/* Keep button texts correct */
+body.light-theme main section:not(:first-of-type) a.bg-gradient-to-r,
+body.light-theme main section:not(:first-of-type) button.bg-gradient-to-r,
+body.light-theme .bg-transparent section:not(:first-of-type) a.bg-gradient-to-r,
+body.light-theme .bg-transparent section:not(:first-of-type) button.bg-gradient-to-r {
+  color: #0c0a09 !important; /* Ensure buttons have dark text */
+}
+
+/* FAQ answers and headers inside accordions */
+body.light-theme .faq-question, 
+body.light-theme .faq-answer {
+  color: #2d241e !important;
+}
+
+/* ==========================================================
+   Header (Navigation Bar) scroll-aware light transition
+   ========================================================== */
+
+/* Scrolled navigation header */
+body.light-theme header.bg-theatre-black\/80 {
   background-color: rgba(255, 255, 255, 0.85) !important;
   backdrop-filter: blur(12px) !important;
   border-bottom: 1px solid rgba(212, 168, 66, 0.2) !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02) !important;
-}
-header.bg-theatre-black\/80 .text-white {
-  color: #1c1917 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* Mobile menu light background */
-header nav.bg-theatre-black\/90 {
+/* Mobile dropdown when header is scrolled */
+body.light-theme header nav.bg-theatre-black\/90 {
   background-color: rgba(255, 255, 255, 0.95) !important;
   backdrop-filter: blur(12px) !important;
   border-top: 1px solid rgba(212, 168, 66, 0.2) !important;
 }
 
-/* Keep media overlays and video hero content text white */
-.relative.overflow-hidden .relative.z-10,
-.relative.overflow-hidden .relative.z-10 *,
-section.relative .relative.z-10,
-section.relative .relative.z-10 * {
-  color: #ffffff !important;
-}
+/* ==========================================================
+   Cinema / Dark overlays (lightbox & solid dark footer)
+   ========================================================== */
 
-/* Correct gold subheadings in heroes */
-.relative.overflow-hidden .relative.z-10 .text-gold-500,
-section.relative .relative.z-10 .text-gold-500 {
-  color: #facc15 !important; /* gold-400 for brightness on dark video overlay */
-}
-
-/* Keep buttons text correct */
-a.bg-gradient-to-r, button.bg-gradient-to-r {
-  color: #0c0a09 !important; /* Stone-950/Black for buttons */
-}
-
-/* FAQ Accordion headers should be dark */
-.faq-question, .faq-answer {
-  color: #1c1917 !important;
-}
-
-/* Light theme support for dialogs and select options */
-select option {
-  background-color: #ffffff !important;
-  color: #1c1917 !important;
-}
-
-/* Gallery lightbox should remain dark and cinematic */
+/* Lightbox popup overlay must remain dark */
 .fixed.z-50.bg-theatre-black\/95,
 .fixed.z-50.bg-theatre-black\/95 * {
   background-color: rgba(10, 10, 10, 0.95) !important;
   color: #ffffff !important;
 }
 
-/* Dark Solid Footer Anchor */
+/* Dark solid footer anchor */
 footer {
-  background-color: #0a0a0a !important;
+  background-color: #0c0a09 !important; /* Espresso/Stone-950 dark tone */
   border-top: 1px solid rgba(212, 168, 66, 0.2) !important;
 }
 footer * {

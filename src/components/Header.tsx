@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Theater } from 'lucide-react';
+import { Menu, X, Theater, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const navLinks = [
   { path: '/', label: 'Home' },
@@ -16,6 +17,9 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
+
+  const isLightScrolled = theme === 'light' && scrolled;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -44,7 +48,7 @@ export default function Header() {
               <div className="absolute -inset-1 bg-gold-500/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             <div className="flex flex-col">
-              <span className="font-display text-xl font-bold text-white tracking-wider">
+              <span className={`font-display text-xl font-bold tracking-wider transition-colors duration-300 ${isLightScrolled ? 'text-stone-900' : 'text-white'}`}>
                 THEATRE THESIS
               </span>
               <span className="text-[10px] uppercase tracking-[0.3em] text-gold-500 font-medium -mt-0.5">
@@ -63,8 +67,8 @@ export default function Header() {
                   to={link.path}
                   className={`group relative px-4 py-2 text-sm font-medium uppercase tracking-wider transition-colors duration-300 ${
                     active
-                      ? 'text-gold-400'
-                      : 'text-gray-300 hover:text-gold-400'
+                      ? isLightScrolled ? 'text-gold-700 font-semibold' : 'text-gold-400'
+                      : isLightScrolled ? 'text-stone-700 hover:text-gold-700' : 'text-gray-300 hover:text-gold-400'
                   }`}
                 >
                   {link.label}
@@ -75,6 +79,19 @@ export default function Header() {
                 </Link>
               );
             })}
+            {/* Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="ml-2 p-2.5 rounded-full hover:bg-gold-500/10 transition-all duration-300 flex items-center justify-center border border-transparent hover:border-gold-500/20 active:scale-95"
+              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'light' ? (
+                <Moon className={`w-4 h-4 ${scrolled ? 'text-stone-850' : 'text-white'}`} />
+              ) : (
+                <Sun className="w-4 h-4 text-gold-400" />
+              )}
+            </button>
             <Link
               to="/contact"
               className="ml-4 px-5 py-2.5 bg-gradient-to-r from-gold-700 to-gold-600 text-theatre-black font-semibold text-sm uppercase tracking-wider rounded hover:from-gold-600 hover:to-gold-500 transition-all duration-300 shadow-lg shadow-gold-900/30"
@@ -83,20 +100,38 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* Mobile Toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-gray-300 hover:text-gold-400 transition-colors"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Theme Toggle & Menu Toggle wrapper */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full transition-colors active:scale-95 ${
+                isLightScrolled ? 'text-stone-850 hover:bg-gold-500/10' : 'text-gray-300 hover:bg-gold-500/10'
+              }`}
+              title={theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'light' ? (
+                <Moon className="w-5 h-5" />
+              ) : (
+                <Sun className="w-5 h-5 text-gold-400" />
+              )}
+            </button>
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className={`p-2 transition-colors ${
+                isLightScrolled ? 'text-stone-900 hover:text-gold-700' : 'text-gray-300 hover:text-gold-400'
+              }`}
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-500 ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? 'max-h-[450px] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <nav className="bg-theatre-black/90 backdrop-blur-md border-t border-gold-900/20 px-4 py-4 space-y-1">
@@ -108,8 +143,10 @@ export default function Header() {
                 to={link.path}
                 className={`block px-4 py-3 text-sm font-medium uppercase tracking-wider rounded transition-colors ${
                   active
-                    ? 'text-gold-400 bg-gold-900/20'
-                    : 'text-gray-300 hover:text-gold-400 hover:bg-white/5'
+                    ? 'text-gold-500 bg-gold-500/10 font-semibold'
+                    : theme === 'light'
+                      ? 'text-stone-700 hover:text-gold-700 hover:bg-stone-100'
+                      : 'text-gray-300 hover:text-gold-400 hover:bg-theatre-dark/50'
                 }`}
               >
                 {link.label}

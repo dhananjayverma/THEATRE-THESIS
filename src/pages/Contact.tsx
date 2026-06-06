@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Phone,
@@ -11,6 +12,24 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+
+const coursesList = [
+  'Acting Training Programs',
+  'Camera Acting & Audition Training',
+  'Voice & Speech Training',
+  'Body Movement & Expression',
+  'Theatre Workshops & Live Performances',
+  'Personality Development for Actors',
+  'Audition & Career Guidance',
+  'Portfolio & Showreel Creation',
+  'AI-Based Acting Practice',
+  '1-on-1 Mentorship Programs',
+  'Workshops & Masterclasses',
+  'Online Acting Classes',
+  'Casting & Audition Opportunities',
+  'Certification & Evaluation',
+  'Acting Community & Networking',
+];
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -27,6 +46,7 @@ const staggerContainer = {
 };
 
 export default function Contact() {
+  const location = useLocation();
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,6 +56,21 @@ export default function Contact() {
     course: '',
     message: '',
   });
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const queryCourse = params.get('course');
+    if (queryCourse) {
+      setForm((prev) => ({ ...prev, course: queryCourse }));
+      
+      const formSection = document.getElementById('contact-form-section');
+      if (formSection) {
+        setTimeout(() => {
+          formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }, [location]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,6 +186,7 @@ export default function Contact() {
 
             {/* Contact Form */}
             <motion.div
+              id="contact-form-section"
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -224,11 +260,11 @@ export default function Contact() {
                         className="w-full px-4 py-3 bg-theatre-black/60 border border-gold-900/30 rounded-lg text-white focus:border-gold-500/50 focus:outline-none focus:ring-1 focus:ring-gold-500/30 transition-all duration-300 appearance-none"
                       >
                         <option value="" disabled>Select a course</option>
-                        <option value="beginner">Beginner Acting Course</option>
-                        <option value="theatre">Theatre Acting Workshop</option>
-                        <option value="camera">Camera Acting Training</option>
-                        <option value="voice">Voice & Body Training</option>
-                        <option value="weekend">Weekend Workshop</option>
+                        {coursesList.map((course) => (
+                          <option key={course} value={course} className="bg-theatre-black text-white">
+                            {course}
+                          </option>
+                        ))}
                       </select>
                     </div>
 

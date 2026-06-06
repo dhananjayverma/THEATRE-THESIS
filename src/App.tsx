@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -48,18 +49,20 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <ScrollToTop />
-      {showCurtain && <CurtainTransition />}
-      <div className="min-h-screen bg-transparent text-white font-body overflow-x-hidden w-full relative">
-        <Header />
-        <main>
-          <AnimatedRoutes />
-        </main>
-        <Footer />
-        <FloatingActions />
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <ScrollToTop />
+        {showCurtain && <CurtainTransition />}
+        <div className="min-h-screen bg-transparent text-white font-body overflow-x-hidden w-full relative">
+          <Header />
+          <main>
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+          <FloatingActions />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

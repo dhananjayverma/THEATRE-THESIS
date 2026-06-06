@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -217,6 +218,12 @@ const services = [
 ];
 
 export default function Services() {
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+
+  const handleCardToggle = (id: string) => {
+    setExpandedId(prev => prev === id ? null : id);
+  };
+
   return (
     <div className="bg-transparent text-white">
       {/* Hero */}
@@ -259,27 +266,28 @@ export default function Services() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
-            className="space-y-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           >
-            {services.map((service, i) => (
-              <motion.div
-                key={service.id}
-                id={service.id}
-                variants={fadeInUp}
-                custom={i}
-                className={`group relative bg-gradient-to-r ${service.accent} border ${service.accentBorder} rounded-2xl overflow-hidden hover:border-gold-500/30 transition-all duration-500`}
-              >
-                <div className="grid lg:grid-cols-5 gap-0">
+            {services.map((service, i) => {
+              const isExpanded = expandedId === service.id;
+              return (
+                <motion.div
+                  key={service.id}
+                  id={service.id}
+                  variants={fadeInUp}
+                  custom={i}
+                  onClick={() => handleCardToggle(service.id)}
+                  className={`group relative bg-gradient-to-b ${service.accent} border ${service.accentBorder} rounded-2xl overflow-hidden hover:border-gold-500/30 hover:shadow-xl hover:shadow-gold-500/5 transition-all duration-500 flex flex-col cursor-pointer select-none`}
+                >
                   {/* Image */}
-                  <div className="lg:col-span-2 relative h-56 lg:h-auto">
+                  <div className="relative h-48 w-full overflow-hidden shrink-0">
                     <img
                       src={service.image}
                       alt={service.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-theatre-dark/90 hidden lg:block" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-theatre-dark/80 to-transparent lg:hidden" />
-                    <div className="absolute top-4 left-4 font-display text-5xl font-bold text-gold-500/20 select-none">
+                    <div className="absolute inset-0 bg-gradient-to-t from-theatre-dark/95 via-theatre-dark/20 to-transparent" />
+                    <div className="absolute top-4 left-4 font-display text-4xl font-bold text-gold-500/20 select-none">
                       {service.number}
                     </div>
                     {service.badge && (
@@ -290,41 +298,66 @@ export default function Services() {
                   </div>
 
                   {/* Content */}
-                  <div className="lg:col-span-3 p-8 lg:p-10">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-10 h-10 rounded-lg bg-gold-900/40 border border-gold-800/30 flex items-center justify-center shrink-0">
-                        <service.icon className="w-5 h-5 text-gold-400" />
-                      </div>
-                      <div>
-                        <p className="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-medium">{service.subtitle}</p>
-                        <h3 className="font-display text-xl sm:text-2xl font-bold text-white">{service.title}</h3>
-                      </div>
-                    </div>
-
-                    <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                      {service.description}
-                    </p>
-
-                    <div className="grid sm:grid-cols-2 gap-3 mb-6">
-                      {service.features.map((feature) => (
-                        <div key={feature} className="flex items-center gap-2 text-sm text-gray-300">
-                          <span className="w-1.5 h-1.5 bg-gold-500 rounded-full shrink-0" />
-                          {feature}
+                  <div className="p-6 flex flex-col flex-grow justify-between">
+                    <div>
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-9 h-9 rounded-lg bg-gold-900/40 border border-gold-800/30 flex items-center justify-center shrink-0">
+                          <service.icon className="w-4.5 h-4.5 text-gold-400" />
                         </div>
-                      ))}
+                        <div>
+                          <p className="text-gold-500/60 text-[10px] uppercase tracking-[0.2em] font-medium">{service.subtitle}</p>
+                          <h3 className="font-display text-lg font-bold text-white group-hover:text-gold-400 transition-colors duration-300">{service.title}</h3>
+                        </div>
+                      </div>
+
+                      {/* Collapsible Details */}
+                      <motion.div
+                        initial={false}
+                        animate={{
+                          height: isExpanded ? 'auto' : 0,
+                          opacity: isExpanded ? 1 : 0
+                        }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-gray-400 text-xs leading-relaxed mt-3 mb-4">
+                          {service.description}
+                        </p>
+
+                        <div className="space-y-2 mb-5">
+                          {service.features.map((feature) => (
+                            <div key={feature} className="flex items-start gap-2 text-xs text-gray-300">
+                              <span className="w-1.5 h-1.5 bg-gold-500 rounded-full mt-1.5 shrink-0" />
+                              <span>{feature}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <Link
+                          to={`/contact?course=${encodeURIComponent(service.title)}`}
+                          onClick={(e) => e.stopPropagation()}
+                          className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-gold-700 to-gold-600 text-theatre-black font-semibold text-xs uppercase tracking-wider rounded-lg hover:from-gold-600 hover:to-gold-500 transition-all duration-300 shadow-lg shadow-gold-900/20 mb-2"
+                        >
+                          Apply Now
+                          <ChevronRight className="w-3 h-3" />
+                        </Link>
+                      </motion.div>
                     </div>
 
-                    <Link
-                      to="/contact"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-gold-700 to-gold-600 text-theatre-black font-semibold text-xs uppercase tracking-wider rounded-lg hover:from-gold-600 hover:to-gold-500 transition-all duration-300 shadow-lg shadow-gold-900/20"
-                    >
-                      Get Started
-                      <ChevronRight className="w-3.5 h-3.5" />
-                    </Link>
+                    {/* View Details / Collapse Toggle Indicator */}
+                    <div className="mt-4 flex items-center justify-between border-t border-gold-900/10 pt-4 text-[10px] font-semibold uppercase tracking-wider text-gold-500/80 group-hover:text-gold-400 transition-colors duration-300">
+                      <span>{isExpanded ? 'Collapse Details' : 'View Details'}</span>
+                      <motion.div
+                        animate={{ rotate: isExpanded ? 180 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ChevronRight className="w-3.5 h-3.5 rotate-90" />
+                      </motion.div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>

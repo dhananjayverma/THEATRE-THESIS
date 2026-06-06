@@ -114,7 +114,7 @@ export default function Home() {
             poster="https://images.pexels.com/photos/45258/theatre-hall-theatre-stage-stage-performance-45258.jpeg?auto=compress&cs=tinysrgb&w=1920"
           >
             <source
-              src="https://kid-sens.com/main/public/videos/atelier_theatre.mp4"
+              src="https://player.vimeo.com/external/351250473.hd.mp4?s=0659a112ecadb56e1fbe83d3c38de29ca4c3b345&profile_id=175"
               type="video/mp4"
             />
           </video>
